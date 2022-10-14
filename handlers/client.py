@@ -53,11 +53,6 @@ async def quiz_1(message: types.Message):
     )
 
 
-async def fall(message: types.Message):
-    await bot.send_dice(message.chat.id, emoji="")
-    await bot.send_dice(message.chat.id, emoji="")
-
-
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(start, commands=["start"])
     dp.register_message_handler(help_1, commands=["help"])
