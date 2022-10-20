@@ -1,11 +1,12 @@
 from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot, dp
+from keyboard.fsmAdminMentor_kb import start_markup
 
 
 async def start(message: types.Message):
     await bot.send_message(message.chat.id, f"Приветствую {message.from_user.first_name}. 😁"
-                                                 f"\nИспользуйте команду /help для большей информации")
+                                            f"\nИспользуйте команду /help для большей информации")
 
 
 async def help_1(message: types.Message):
@@ -15,9 +16,10 @@ async def help_1(message: types.Message):
                                             "\nИли любое число и тогда бот возведет его в квадрат."
                                             "\nА еще вы можете написать мне 'Привет'))"
                                             "\nС помощью команды !pin вы можете закрепить сообщение"
-                                            "\nТОЛЬКО ДЛЯ АДМИНИСТРАТОРОВ!"
+                                            "\n------------ТОЛЬКО ДЛЯ АДМИНИСТРАТОРОВ!------------"
                                             "\nЕсли сообщение начнется с game, то бот кинет эмодзи)"
-                                            "\nХотите добавить ментора? Введите /form")
+                                            "\nХотите добавить ментора? Введите /form",
+                           reply_markup=start_markup)
 
 
 async def kpop(message: types.Message):

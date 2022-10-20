@@ -1,5 +1,16 @@
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
+
+start_markup = ReplyKeyboardMarkup(
+    resize_keyboard=True
+)
+
+mem = KeyboardButton('/mem')
+quiz = KeyboardButton('/quiz')
+form = KeyboardButton('/form')
+
+start_markup.add(mem, quiz, form)
+
 branch_markup = ReplyKeyboardMarkup(
     resize_keyboard=True,
     one_time_keyboard=True

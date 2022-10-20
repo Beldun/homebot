@@ -5,7 +5,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from config import bot, ADMIN
-from keyboard.fsmAdminMentor_kb import branch_markup, submit_markup, cancel_markup
+from keyboard.fsmAdminMentor_kb import branch_markup, submit_markup, cancel_markup, start_markup
 
 
 class FSMAdmin(StatesGroup):
@@ -31,10 +31,18 @@ async def fsm_start(message: types.Message):
 
 async def load_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['id'] = random.randint(1, 1000)
-        data['name'] = str(message.text)
-    await FSMAdmin.next()
-    await message.answer(f"Какое направление у ментора??", reply_markup=branch_markup)
+        lst = []
+        k = random.randint(100000, 999999)
+        while k in lst:
+            k = random.randint(100000, 999999)
+        lst.append(k)
+        data['id'] = k
+        if message.text.isalpha():
+            data['name'] = message.text
+            await FSMAdmin.next()
+            await message.answer(f"Какое направление у ментора??", reply_markup=branch_markup)
+        else:
+            await message.answer("Имя с цифрами? Мне кажется, что ментор не сын Илона")
 
 
 async def load_branch(message: types.Message, state: FSMContext):
@@ -67,32 +75,32 @@ async def load_age(message: types.Message, state: FSMContext):
 
 
 async def load_group(message: types.Message, state: FSMContext):
-    flag = 0
-    for i in message.text:
-        if i.isalpha():
-            await message.answer("В названиях групп буквы не используются")
-            flag = 1
-            break
-        else:
-            async with state.proxy() as data:
-                data['group'] = message.text
-                await message.answer("Для завершения давайте проверим правильность введенных данных:"
-                                     f"\nID и имя ментора - [{data['id']}]{data['name']}"
-                                     f"\nЕго направление - {data['branch']}\nВозраст - {data['age']}"
-                                     f"\nУчится в {data['group']} группе.")
-            await FSMAdmin.next()
-            await message.answer(f"Вы подтверждаете записанные данные ментора {data['name']}?          <<<да/нет>>>",
-                                 reply_markup=submit_markup)
+    async with state.proxy() as data:
+        flag = 0
+        for i in message.text:
+            if i.isalpha():
+                await message.answer("В названиях групп буквы не используются")
+                flag = 1
+                break
+            if not flag:
+                    data['group'] = message.text
+                    await message.answer("Для завершения давайте проверим правильность введенных данных:"
+                                         f"\nID и имя ментора - [{data['id']}]{data['name']}"
+                                         f"\nЕго направление - {data['branch']}\nВозраст - {data['age']}"
+                                         f"\nУчится в {data['group']} группе.")
+                    await FSMAdmin.next()
+                    await message.answer(f"Вы подтверждаете записанные данные ментора {data['name']}? "
+                                         f"\n<<<да/нет>>>", reply_markup=submit_markup)
 
 
 async def submit(message: types.Message, state: FSMContext):
     if message.text.lower() == 'да':
         async with state.proxy() as data:
             await state.finish()
-            await message.answer(f"Поздравляем нового ментора по имени {data['name']}!!!")
+            await message.answer(f"Поздравляем нового ментора по имени {data['name']}!!!", reply_markup=start_markup)
     elif message.text.lower() == 'нет':
         await state.finish()
-        await message.answer('Очень жаль, давай по новой')
+        await message.answer('Очень жаль, давай по новой', reply_markup=start_markup)
     else:
         await message.answer("Понятно же написано <<<ДА>>> или <<<НЕТ>>>")
 
