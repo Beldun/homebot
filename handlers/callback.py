@@ -1,6 +1,7 @@
 from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot, dp
+from db.db_menthor import sql_command_del
 import random
 
 
@@ -191,6 +192,12 @@ async def ok(call: types.CallbackQuery):
     await bot.send_message(call.from_user.id, "Спасибо за ваш отзыв! ☺️")
 
 
+async def complete_delete(call: types.CallbackQuery):
+    await sql_command_del(call.data.replace('delete ', ''))
+    await call.answer(text="Удалено из БД", show_alert=True)
+    await bot.delete_message(call.message.chat.id, call.message.message_id)
+
+
 def register_handlers_callback(dp: Dispatcher):
     dp.callback_query_handler(cat_meme, lambda call: call.data == "button_call_cats")
     dp.callback_query_handler(school_meme, lambda call: call.data == "button_call_school")
@@ -201,3 +208,5 @@ def register_handlers_callback(dp: Dispatcher):
     dp.callback_query_handler(quiz_4, lambda call: call.data == "button_call_mc")
     dp.callback_query_handler(quiz_f, lambda call: call.data == "button_call_pic")
     dp.callback_query_handler(ok, lambda call: call.data == "button_score")
+    dp.register_callback_query_handler(complete_delete,
+                                       lambda call: call.data and call.data.startswith('delete '))

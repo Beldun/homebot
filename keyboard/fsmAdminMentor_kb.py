@@ -8,8 +8,9 @@ start_markup = ReplyKeyboardMarkup(
 mem = KeyboardButton('/mem')
 quiz = KeyboardButton('/quiz')
 form = KeyboardButton('/form')
+delt = KeyboardButton('/del')
 
-start_markup.add(mem, quiz, form)
+start_markup.add(mem, quiz, form, delt)
 
 branch_markup = ReplyKeyboardMarkup(
     resize_keyboard=True,

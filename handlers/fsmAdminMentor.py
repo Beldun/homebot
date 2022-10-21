@@ -39,7 +39,7 @@ async def load_name(message: types.Message, state: FSMContext):
         lst.append(k)
         data['id'] = k
         if message.text.isalpha():
-            data['namme'] = message.text
+            data['name'] = message.text
             await FSMAdmin.next()
             await message.answer(f"Какое направление у ментора??", reply_markup=branch_markup)
         else:
@@ -84,15 +84,15 @@ async def load_group(message: types.Message, state: FSMContext):
             break
     if not flag:
         async with state.proxy() as data:
-            data['groupp'] = message.text
+            data['groupe'] = message.text
             await message.answer("Для завершения давайте проверим правильность введенных данных:"
                                  f"\nID - [{data['id']}]"
-                                 f"\nИмя - {data['namme']}"
+                                 f"\nИмя - {data['name']}"
                                  f"\nНаправление - {data['branch']}"
                                  f"\nВозраст - {data['age']}"
-                                 f"\nГруппа - {data['groupp']}")
+                                 f"\nГруппа - {data['groupe']}")
             await FSMAdmin.next()
-            await message.answer(f"Вы подтверждаете записанные данные ментора {data['namme']}? "
+            await message.answer(f"Вы подтверждаете записанные данные ментора {data['name']}? "
                                  f"\n<<<да/нет>>>", reply_markup=submit_markup)
 
 
@@ -101,7 +101,7 @@ async def submit(message: types.Message, state: FSMContext):
         async with state.proxy() as data:
             await sql_command_insert(state)
             await state.finish()
-            await message.answer(f"Поздравляем нового ментора по имени {data['namme']}!!!", reply_markup=start_markup)
+            await message.answer(f"Поздравляем нового ментора по имени {data['name']}!!!", reply_markup=start_markup)
     elif message.text.lower() == 'нет':
         await state.finish()
         await message.answer('Очень жаль, давай по новой', reply_markup=start_markup)

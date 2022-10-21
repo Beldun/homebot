@@ -12,8 +12,8 @@ def sql_create():
         print('База данных подключена')
 
     db.execute("CREATE TABLE IF NOT EXISTS form "
-               "(id INTEGER PRIMARY KEY, namme TEXT,"
-               "branch TEXT, age INTEGER, groupp TEXT)")
+               "(id INTEGER PRIMARY KEY, name TEXT,"
+               "branch TEXT, age INTEGER, groupe TEXT)")
     db.commit()
 
 
