@@ -2,6 +2,7 @@ from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot, dp
 from keyboard.fsmAdminMentor_kb import start_markup
+from db.db_menthor import sql_command_random
 
 
 async def start(message: types.Message):
@@ -59,9 +60,14 @@ async def quiz_1(message: types.Message):
     )
 
 
+async def get_random_user(message: types.Message):
+    await sql_command_random(message)
+
+
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(start, commands=["start"])
     dp.register_message_handler(help_1, commands=["help"])
     dp.register_message_handler(kpop, commands=["mem"])
     dp.register_message_handler(quiz_1, commands=["quiz"])
+    dp.register_message_handler(sql_command_random, commands=["random"])
 
