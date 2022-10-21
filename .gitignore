@@ -1,6 +1,7 @@
 venv
 .env
 .gittip
+docxtip
 
 .idea
 .vscode
