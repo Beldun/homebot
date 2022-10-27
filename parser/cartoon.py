@@ -18,7 +18,7 @@ def get_html(url, params=''):
     return req
 
 
-def get_tale(html):
+def get_genre_cartoon(html):
     soup = BS(html, 'html.parser')
     items = soup.find_all('div', class_='b-content__inline_item')
     tale = []
@@ -36,7 +36,7 @@ def parser_tale():
         tale = []
         for i in range(1, 2):
             html = get_html(f"{URL_tale}page/{i}/")
-            current_page = get_tale(html.text)
+            current_page = get_genre_cartoon(html.text)
             tale.extend(current_page)
         return tale
     else:
@@ -49,7 +49,7 @@ def parser_kids():
         kids = []
         for i in range(1, 2):
             html = get_html(f"{URL_kids}page/{i}/")
-            current_page = get_tale(html.text)
+            current_page = get_genre_cartoon(html.text)
             kids.extend(current_page)
         return kids
     else:
@@ -62,7 +62,7 @@ def parser_cognitive():
         cognitive = []
         for i in range(1, 2):
             html = get_html(f"{URL_cognitive}page/{i}/")
-            current_page = get_tale(html.text)
+            current_page = get_genre_cartoon(html.text)
             cognitive.extend(current_page)
         return cognitive
     else:
@@ -75,7 +75,7 @@ def parser_adult():
         adult = []
         for i in range(1, 2):
             html = get_html(f"{URL_adult}page/{i}/")
-            current_page = get_tale(html.text)
+            current_page = get_genre_cartoon(html.text)
             adult.extend(current_page)
         return adult
     else:

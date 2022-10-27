@@ -18,7 +18,7 @@ def get_html(url, params=''):
     return req
 
 
-def get_fantasy(html):
+def get_genre_films(html):
     soup = BS(html, 'html.parser')
     items = soup.find_all('div', class_='b-content__inline_item')
     fantasy = []
@@ -36,7 +36,7 @@ def parser_fantasy():
         fantasy = []
         for i in range(1, 2):
             html = get_html(f"{URL_fantasy}page/{i}/")
-            current_page = get_fantasy(html.text)
+            current_page = get_genre_films(html.text)
             fantasy.extend(current_page)
         return fantasy
     else:
@@ -49,7 +49,7 @@ def parser_horror():
         horror = []
         for i in range(1, 2):
             html = get_html(f"{URL_horror}page/{i}/")
-            current_page = get_fantasy(html.text)
+            current_page = get_genre_films(html.text)
             horror.extend(current_page)
         return horror
     else:
@@ -62,7 +62,7 @@ def parser_action():
         action = []
         for i in range(1, 2):
             html = get_html(f"{URL_action}page/{i}/")
-            current_page = get_fantasy(html.text)
+            current_page = get_genre_films(html.text)
             action.extend(current_page)
         return action
     else:
@@ -75,7 +75,7 @@ def parser_drama():
         drama = []
         for i in range(1, 2):
             html = get_html(f"{URL_drama}page/{i}/")
-            current_page = get_fantasy(html.text)
+            current_page = get_genre_films(html.text)
             drama.extend(current_page)
         return drama
     else:

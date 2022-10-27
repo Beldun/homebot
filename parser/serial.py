@@ -18,7 +18,7 @@ def get_html(url, params=''):
     return req
 
 
-def get_fanta(html):
+def get_genre_serial(html):
     soup = BS(html, 'html.parser')
     items = soup.find_all('div', class_='b-content__inline_item')
     fanta = []
@@ -36,7 +36,7 @@ def parser_fanta():
         fanta = []
         for i in range(1, 2):
             html = get_html(f"{URL_fanta}page/{i}/")
-            current_page = get_fanta(html.text)
+            current_page = get_genre_serial(html.text)
             fanta.extend(current_page)
         return fanta
     else:
@@ -49,7 +49,7 @@ def parser_comedy():
         comedy = []
         for i in range(1, 2):
             html = get_html(f"{URL_comedy}page/{i}/")
-            current_page = get_fanta(html.text)
+            current_page = get_genre_serial(html.text)
             comedy.extend(current_page)
         return comedy
     else:
@@ -62,7 +62,7 @@ def parser_adventure():
         adventure = []
         for i in range(1, 2):
             html = get_html(f"{URL_adventure}page/{i}/")
-            current_page = get_fanta(html.text)
+            current_page = get_genre_serial(html.text)
             adventure.extend(current_page)
         return adventure
     else:
@@ -75,7 +75,7 @@ def parser_melodramas():
         melodramas = []
         for i in range(1, 2):
             html = get_html(f"{URL_melodramas}page/{i}/")
-            current_page = get_fanta(html.text)
+            current_page = get_genre_serial(html.text)
             melodramas.extend(current_page)
         return melodramas
     else:
