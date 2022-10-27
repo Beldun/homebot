@@ -43,41 +43,17 @@ def parser_fanta():
         raise Exception("Error in parser!!!")
 
 
-def get_comedy(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    comedy = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        comedy.append([title, link, more])
-    return comedy
-
-
 def parser_comedy():
     html = get_html(URL_comedy)
     if html.status_code == 200:
         comedy = []
         for i in range(1, 2):
             html = get_html(f"{URL_comedy}page/{i}/")
-            current_page = get_comedy(html.text)
+            current_page = get_fanta(html.text)
             comedy.extend(current_page)
         return comedy
     else:
         raise Exception("Error in parser!!!")
-
-
-def get_adventure(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    adventure = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        adventure.append([title, link, more])
-    return adventure
 
 
 def parser_adventure():
@@ -86,23 +62,11 @@ def parser_adventure():
         adventure = []
         for i in range(1, 2):
             html = get_html(f"{URL_adventure}page/{i}/")
-            current_page = get_adventure(html.text)
+            current_page = get_fanta(html.text)
             adventure.extend(current_page)
         return adventure
     else:
         raise Exception("Error in parser!!!")
-
-
-def get_melodramas(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    melodramas = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        melodramas.append([title, link, more])
-    return melodramas
 
 
 def parser_melodramas():
@@ -111,7 +75,7 @@ def parser_melodramas():
         melodramas = []
         for i in range(1, 2):
             html = get_html(f"{URL_melodramas}page/{i}/")
-            current_page = get_melodramas(html.text)
+            current_page = get_fanta(html.text)
             melodramas.extend(current_page)
         return melodramas
     else:

@@ -43,41 +43,17 @@ def parser_romance():
         raise Exception("Error in parser!!!")
 
 
-def get_samurai(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    samurai = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        samurai.append([title, link, more])
-    return samurai
-
-
 def parser_samurai():
     html = get_html(URL_samurai)
     if html.status_code == 200:
         samurai = []
         for i in range(1, 2):
             html = get_html(f"{URL_samurai}page/{i}/")
-            current_page = get_samurai(html.text)
+            current_page = get_romance(html.text)
             samurai.extend(current_page)
         return samurai
     else:
         raise Exception("Error in parser!!!")
-
-
-def get_shounenai(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    shounenai = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        shounenai.append([title, link, more])
-    return shounenai
 
 
 def parser_shounenai():
@@ -86,23 +62,11 @@ def parser_shounenai():
         shounenai = []
         for i in range(1, 2):
             html = get_html(f"{URL_shounenai}page/{i}/")
-            current_page = get_shounenai(html.text)
+            current_page = get_romance(html.text)
             shounenai.extend(current_page)
         return shounenai
     else:
         raise Exception("Error in parser!!!")
-
-
-def get_everyday(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    everyday = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        everyday.append([title, link, more])
-    return everyday
 
 
 def parser_everyday():
@@ -111,7 +75,7 @@ def parser_everyday():
         everyday = []
         for i in range(1, 2):
             html = get_html(f"{URL_everyday}page/{i}/")
-            current_page = get_everyday(html.text)
+            current_page = get_romance(html.text)
             everyday.extend(current_page)
         return everyday
     else:

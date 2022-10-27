@@ -43,41 +43,17 @@ def parser_tale():
         raise Exception("Error in parser!!!")
 
 
-def get_kids(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    kids = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        kids.append([title, link, more])
-    return kids
-
-
 def parser_kids():
     html = get_html(URL_kids)
     if html.status_code == 200:
         kids = []
         for i in range(1, 2):
             html = get_html(f"{URL_kids}page/{i}/")
-            current_page = get_kids(html.text)
+            current_page = get_tale(html.text)
             kids.extend(current_page)
         return kids
     else:
         raise Exception("Error in parser!!!")
-
-
-def get_cognitive(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    cognitive = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        cognitive.append([title, link, more])
-    return cognitive
 
 
 def parser_cognitive():
@@ -86,23 +62,11 @@ def parser_cognitive():
         cognitive = []
         for i in range(1, 2):
             html = get_html(f"{URL_cognitive}page/{i}/")
-            current_page = get_cognitive(html.text)
+            current_page = get_tale(html.text)
             cognitive.extend(current_page)
         return cognitive
     else:
         raise Exception("Error in parser!!!")
-
-
-def get_adult(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    adult = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        adult.append([title, link, more])
-    return adult
 
 
 def parser_adult():
@@ -111,7 +75,7 @@ def parser_adult():
         adult = []
         for i in range(1, 2):
             html = get_html(f"{URL_adult}page/{i}/")
-            current_page = get_adult(html.text)
+            current_page = get_tale(html.text)
             adult.extend(current_page)
         return adult
     else:

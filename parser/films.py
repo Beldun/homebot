@@ -43,41 +43,17 @@ def parser_fantasy():
         raise Exception("Error in parser!!!")
 
 
-def get_horror(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    horror = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        horror.append([title, link, more])
-    return horror
-
-
 def parser_horror():
     html = get_html(URL_horror)
     if html.status_code == 200:
         horror = []
         for i in range(1, 2):
             html = get_html(f"{URL_horror}page/{i}/")
-            current_page = get_horror(html.text)
+            current_page = get_fantasy(html.text)
             horror.extend(current_page)
         return horror
     else:
         raise Exception("Error in parser!!!")
-
-
-def get_action(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    action = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        action.append([title, link, more])
-    return action
 
 
 def parser_action():
@@ -86,23 +62,11 @@ def parser_action():
         action = []
         for i in range(1, 2):
             html = get_html(f"{URL_action}page/{i}/")
-            current_page = get_action(html.text)
+            current_page = get_fantasy(html.text)
             action.extend(current_page)
         return action
     else:
         raise Exception("Error in parser!!!")
-
-
-def get_drama(html):
-    soup = BS(html, 'html.parser')
-    items = soup.find_all('div', class_='b-content__inline_item')
-    drama = []
-    for item in items:
-        title = item.find('div', class_="b-content__inline_item-link").find('a').getText()
-        link = item.find('div', class_="b-content__inline_item-link").find('a').get('href')
-        more = item.find('div', class_="b-content__inline_item-link").find('div').getText()
-        drama.append([title, link, more])
-    return drama
 
 
 def parser_drama():
@@ -111,7 +75,7 @@ def parser_drama():
         drama = []
         for i in range(1, 2):
             html = get_html(f"{URL_drama}page/{i}/")
-            current_page = get_drama(html.text)
+            current_page = get_fantasy(html.text)
             drama.extend(current_page)
         return drama
     else:
