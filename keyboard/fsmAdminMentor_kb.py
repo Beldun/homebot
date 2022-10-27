@@ -7,10 +7,11 @@ start_markup = ReplyKeyboardMarkup(
 
 mem = KeyboardButton('/mem')
 quiz = KeyboardButton('/quiz')
+watch = KeyboardButton('/watch')
 form = KeyboardButton('/form')
 delt = KeyboardButton('/del')
 
-start_markup.add(mem, quiz, form, delt)
+start_markup.add(mem, quiz, watch, form, delt)
 
 branch_markup = ReplyKeyboardMarkup(
     resize_keyboard=True,
