@@ -1,7 +1,7 @@
 venv
 .env
 .gittip
-.docxtip
+docxtip.py
 test.py
 testmain.py
 
