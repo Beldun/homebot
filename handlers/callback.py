@@ -3,10 +3,9 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot, dp
 from db.db_menthor import sql_command_del
 import random
-from parser.films import parser_fantasy, parser_horror, parser_action, parser_drama
-from parser.serial import parser_fanta, parser_adventure, parser_melodramas, parser_comedy
-from parser.cartoon import parser_tale, parser_adult, parser_cognitive, parser_kids
-from parser.anime import parser_shounenai, parser_everyday, parser_romance, parser_samurai
+from parser.films import parser_fantasy, parser_horror, parser_action, parser_drama, parser_adventure, \
+    parser_melodramas, parser_comedy, parser_fanta, parser_tale, parser_adult, parser_cognitive, parser_kids, \
+    parser_shounenai, parser_everyday, parser_romance, parser_samurai
 
 '''МЕМЫ'''
 
