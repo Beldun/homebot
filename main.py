@@ -2,7 +2,7 @@ from aiogram.utils import executor
 import asyncio
 from config import dp
 import logging
-from handlers import admin, callback, client, extra, fsmAdminMentor, notifications
+from handlers import admin, callback, client, extra, fsmAdminMentor, notifications, inline
 from db.db_menthor import sql_create
 
 callback.register_handlers_callback(dp)
@@ -10,6 +10,7 @@ client.register_handlers_client(dp)
 fsmAdminMentor.register_handlers_fsm_mentors(dp)
 admin.register_handlers_admin(dp)
 notifications.register_handlers_notifications(dp)
+inline.register_handler_inline(dp)
 
 extra.register_handlers_extra(dp)
 
