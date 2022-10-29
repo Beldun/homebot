@@ -9,9 +9,9 @@ async def inline_wiki_handler(query: types.InlineQuery):
 
     articles = [types.InlineQueryResultArticle(
         id=hashlib.md5(text.encode()).hexdigest(),
-        title="Wiki",
+        title=f"Поиск в вики по запросу {text}",
         url=link,
-        thumb_url="https://upload.wikimedia.org/wikipedia/commons/c/c8/Black_W_for_promotion.png",
+        thumb_url="https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png",
         input_message_content=types.InputMessageContent(
             message_text=f"Ваша ссылка для развития готова\n{link}"
         )
