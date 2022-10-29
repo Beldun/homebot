@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   bot:
-    container_name: bot-22-2
+    container_name: bdbot
     restart: always
     build:
       context: .
