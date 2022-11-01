@@ -62,6 +62,13 @@ async def quiz_1(message: types.Message):
     )
 
 
+async def game(message: types.Message):
+    markup = InlineKeyboardMarkup()
+    button_game = InlineKeyboardButton("Game", callback_data="button_game")
+    markup.add(button_game)
+    await bot.send_message(message.from_user.id, "Нажмите кнопку ниже, чтобы начать игру", reply_markup=markup)
+
+
 async def get_random_user(message: types.Message):
     await sql_command_random(message)
 
@@ -83,4 +90,5 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(quiz_1, commands=["quiz"])
     dp.register_message_handler(sql_command_random, commands=["random"])
     dp.register_message_handler(get_films, commands=["watch"])
+    dp.register_message_handler(game, commands=["dice"])
 
