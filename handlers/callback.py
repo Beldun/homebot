@@ -427,21 +427,28 @@ async def parser_serial_everyday(call: types.CallbackQuery):
 
 
 async def call_game(call: types.CallbackQuery):
+    markup = InlineKeyboardMarkup()
+    again = InlineKeyboardButton("TRY AGAIN", callback_data='again_button')
+    markup.add(again)
     player = await bot.send_dice(call.from_user.id)
     boot = await bot.send_dice(call.from_user.id)
     if player.dice.value > boot.dice.value:
         await bot.send_message(call.from_user.id, f"CONGRATULAYIONS!!! PLAYER WON!!!! "
-                                                  f"SCORE {player.dice.value}:{boot.dice.value}")
+                                                  f"SCORE {player.dice.value}:{boot.dice.value}",
+                               reply_markup=markup)
     elif boot.dice.value > player.dice.value:
-        await bot.send_message(call.from_user.id, f"OOPS, BOT WON. SCORE {player.dice.value}:{boot.dice.value}")
+        await bot.send_message(call.from_user.id, f"OOPS, BOT WON. SCORE {player.dice.value}:{boot.dice.value}",
+                               reply_markup=markup)
     elif player.dice.value == boot.dice.value:
-        await bot.send_message(call.from_user.id, f"DRAW, TRY AGAIN) SCORE {player.dice.value}:{boot.dice.value}")
+        await bot.send_message(call.from_user.id, f"DRAW, TRY AGAIN) SCORE {player.dice.value}:{boot.dice.value}",
+                               reply_markup=markup)
     else:
         await bot.send_message(call.from_user.id, "TRY AGAIN")
 
 
 def register_handlers_callback(dp: Dispatcher):
     dp.register_callback_query_handler(call_game, lambda call: call.data == "button_game")
+    dp.register_callback_query_handler(call_game, lambda call: call.data == "again_button")
     # МЕМЫ
     dp.register_callback_query_handler(cat_meme, lambda call: call.data == "button_call_cats")
     dp.register_callback_query_handler(school_meme, lambda call: call.data == "button_call_school")
