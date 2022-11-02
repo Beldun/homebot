@@ -427,8 +427,16 @@ async def parser_serial_everyday(call: types.CallbackQuery):
 
 
 async def call_game(call: types.CallbackQuery):
-    await bot.send_dice(call.from_user.id)
-    await bot.send_dice(call.from_user.id)
+    player = await bot.send_dice(call.from_user.id)
+    boot = await bot.send_dice(call.from_user.id)
+    if player.dice.value > boot.dice.value:
+        await bot.send_message(call.from_user.id, "CONGRATULAYIONS!!! PLAYER WON!!!!")
+    elif boot.dice.value > player.dice.value:
+        await bot.send_message(call.from_user.id, "OOPS, BOT WON")
+    elif player.dice.value == boot.dice.value:
+        await bot.send_message(call.from_user.id, "DRAW, TRY AGAIN)")
+    else:
+        await bot.send_message(call.from_user.id, "TRY AGAIN")
 
 
 def register_handlers_callback(dp: Dispatcher):
