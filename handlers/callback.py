@@ -430,11 +430,12 @@ async def call_game(call: types.CallbackQuery):
     player = await bot.send_dice(call.from_user.id)
     boot = await bot.send_dice(call.from_user.id)
     if player.dice.value > boot.dice.value:
-        await bot.send_message(call.from_user.id, "CONGRATULAYIONS!!! PLAYER WON!!!!")
+        await bot.send_message(call.from_user.id, f"CONGRATULAYIONS!!! PLAYER WON!!!! "
+                                                  f"SCORE {player.dice.value}:{boot.dice.value}")
     elif boot.dice.value > player.dice.value:
-        await bot.send_message(call.from_user.id, "OOPS, BOT WON")
+        await bot.send_message(call.from_user.id, f"OOPS, BOT WON. SCORE {player.dice.value}:{boot.dice.value}")
     elif player.dice.value == boot.dice.value:
-        await bot.send_message(call.from_user.id, "DRAW, TRY AGAIN)")
+        await bot.send_message(call.from_user.id, f"DRAW, TRY AGAIN) SCORE {player.dice.value}:{boot.dice.value}")
     else:
         await bot.send_message(call.from_user.id, "TRY AGAIN")
 
