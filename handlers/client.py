@@ -7,7 +7,8 @@ from db.db_menthor import sql_command_random
 
 async def start(message: types.Message):
     await bot.send_message(message.chat.id, f"Приветствую {message.from_user.first_name}. 😁"
-                                            f"\nИспользуйте команду /help для большей информации")
+                                            f"\nИспользуйте команду /help для большей информации",
+                           reply_markup=start_markup)
 
 
 async def help_1(message: types.Message):
@@ -32,10 +33,7 @@ async def kpop(message: types.Message):
     button_call_school = InlineKeyboardButton("School", callback_data="button_call_school")
     button_call_messanger = InlineKeyboardButton("Messanger", callback_data="button_call_messanger")
     button_call_programming = InlineKeyboardButton("Programming", callback_data="button_call_programming")
-    markup.add(button_call_cats)
-    markup.add(button_call_school)
-    markup.add(button_call_messanger)
-    markup.add(button_call_programming)
+    markup.add(button_call_cats, button_call_programming, button_call_messanger, button_call_school)
     await bot.send_message(message.from_user.id, f"Выберите мем", reply_markup=markup)
 
 

@@ -6,6 +6,7 @@ import random
 from parser.films import parser_fantasy, parser_horror, parser_action, parser_drama, parser_adventure, \
     parser_melodramas, parser_comedy, parser_fanta, parser_tale, parser_adult, parser_cognitive, parser_kids, \
     parser_shounenai, parser_everyday, parser_romance, parser_samurai
+import time
 
 '''МЕМЫ'''
 
@@ -433,13 +434,16 @@ async def call_game(call: types.CallbackQuery):
     player = await bot.send_dice(call.from_user.id)
     boot = await bot.send_dice(call.from_user.id)
     if player.dice.value > boot.dice.value:
+        time.sleep(2)
         await bot.send_message(call.from_user.id, f"CONGRATULAYIONS!!! PLAYER WON!!!! "
                                                   f"SCORE {player.dice.value}:{boot.dice.value}",
                                reply_markup=markup)
     elif boot.dice.value > player.dice.value:
+        time.sleep(2)
         await bot.send_message(call.from_user.id, f"OOPS, BOT WON. SCORE {player.dice.value}:{boot.dice.value}",
                                reply_markup=markup)
     elif player.dice.value == boot.dice.value:
+        time.sleep(2)
         await bot.send_message(call.from_user.id, f"DRAW, TRY AGAIN) SCORE {player.dice.value}:{boot.dice.value}",
                                reply_markup=markup)
     else:
